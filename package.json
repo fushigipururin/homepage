@@ -7,10 +7,11 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng src/test",
     "serve:ssr:homepage": "node dist/homepage/server/server.mjs",
     "lint": "ng lint",
-    "prepare": "husky install"
+    "postinstall": "husky",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
@@ -53,10 +54,11 @@
     "typescript-eslint": "8.34.1"
   },
   "lint-staged": {
-    "src/**/*.{ts,html,scss}": [
+    "src/**/*.{ts,html}": [
       "prettier --write",
-      "ng lint",
-      "git add"
-    ]
+      "eslint --fix"
+    ],
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
   }
 }
